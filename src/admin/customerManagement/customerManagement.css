@@ -1,0 +1,48 @@
+
+    :root {
+      --bg: #F4F6F8;
+      --fg: #1A1A1A;
+      --muted: #637381;
+      --accent: #C45C3E;
+      --sidebar-bg: #1A1A1A;
+      --sidebar-text: #9CA3AF;
+      --success: #4CAF50;
+      --warning: #FFA726;
+      --danger: #E53935;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background-color: var(--bg); color: var(--fg); }
+    
+    .admin-layout { display: flex; min-height: 100vh; }
+    
+    /* Sidebar */
+    .sidebar { width: 260px; background: var(--sidebar-bg); color: var(--sidebar-text); flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 100; transition: transform 0.3s ease; }
+    .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: var(--sidebar-text); transition: all 0.2s ease; border-left: 3px solid transparent; margin-bottom: 2px; }
+    .sidebar-link:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+    .sidebar-link.active { background: rgba(196, 92, 62, 0.15); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+    .sidebar-link svg { width: 20px; height: 20px; }
+
+    .main-content { flex: 1; margin-left: 260px; transition: margin-left 0.3s ease; }
+    
+    @media (max-width: 1023px) {
+      .sidebar { transform: translateX(-100%); z-index: 200; }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; }
+    }
+
+    /* Slide-over Panel */
+    .slide-over-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 90; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+    .slide-over-overlay.open { opacity: 1; visibility: visible; }
+    
+    .slide-over-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 720px; background: white; z-index: 100; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+    .slide-over-panel.open { transform: translateX(0); }
+
+    /* Badges */
+    .badge { font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+    .badge-active { background: rgba(76, 175, 80, 0.1); color: var(--success); }
+    .badge-inactive { background: #F3F4F6; color: #6B7280; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #E8E8E5; border-radius: 3px; }
