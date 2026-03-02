@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import "./marketingContent.css"; // Assuming CSS is here
 
 // --- Helper Component: StarRating ---
 const StarRating = ({ rating }) => (

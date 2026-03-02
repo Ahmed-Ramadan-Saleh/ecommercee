@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import "./signin.css"; // Assuming custom CSS for animations, inputs, etc.
 import { Link } from "react-router-dom";
 
 const Signin = () => {
@@ -107,21 +106,21 @@ const Signin = () => {
       <Helmet>
         <title>Sign In - SHOP.CO</title>
       </Helmet>
-      <div className="bg-texture">
+      <div className="bg-texture px-4">
         {/* Main Content */}
         <main className="flex-grow flex items-center justify-center py-12 lg:py-20 px-4">
           <div className="w-full max-w-md animate-fade-up">
-            <div className="bg-white rounded-3xl border border-[#E8E8E5] p-8 lg:p-10 shadow-sm relative overflow-hidden">
+            <div className="bg-surface rounded-3xl border border-line p-8 lg:p-10 shadow-sm relative overflow-hidden">
               {/* Decorative elements */}
-              <div className="absolute w-32 h-32 bg-[#C45C3E]/5 -top-10 -right-10 blur-2xl rounded-full" />
-              <div className="absolute w-24 h-24 bg-[#1A1A1A]/5 -bottom-8 -left-8 blur-2xl rounded-full" />
+              <div className="absolute w-32 h-32 bg-industrial-red/10 -top-10 -right-10 blur-2xl rounded-full" />
+              <div className="absolute w-24 h-24 bg-industrial-dark/5 -bottom-8 -left-8 blur-2xl rounded-full" />
 
               {/* Header */}
               <div className="text-center mb-8 relative">
-                <h1 className="font-display text-3xl lg:text-4xl font-bold mb-2">
+                <h1 className="font-display text-3xl lg:text-4xl font-bold mb-2 text-primary">
                   Welcome Back
                 </h1>
-                <p className="text-[#8A8A8A]">Sign in to continue to SHOP.CO</p>
+                <p className="text-secondary">Sign in to continue to SHOP.CO</p>
               </div>
 
               {/* Form */}
@@ -133,13 +132,13 @@ const Signin = () => {
                 {/* Email */}
                 <div>
                   <label
-                    className="block text-sm font-medium mb-2"
+                    className="block text-sm font-medium text-primary mb-2"
                     htmlFor="email"
                   >
                     Email Address
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8A8A8A]">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-secondary">
                       <svg
                         className="w-5 h-5"
                         fill="none"
@@ -161,13 +160,13 @@ const Signin = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onBlur={handleEmailBlur}
-                      className={`form-input w-full pl-12 pr-4 py-3 rounded-xl bg-[#FAFAF7] ${errors.email ? "error" : ""}`}
+                      className={`form-input w-full pl-12 pr-4 py-3 rounded-xl ${errors.email ? "border-red-500 focus:border-red-500" : ""}`}
                       placeholder="your@email.com"
                       autoComplete="email"
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-xs text-[#E53935] mt-1">
+                    <p className="text-xs text-red-500 mt-1">
                       {errors.email}
                     </p>
                   )}
@@ -176,13 +175,13 @@ const Signin = () => {
                 {/* Password */}
                 <div>
                   <label
-                    className="block text-sm font-medium mb-2"
+                    className="block text-sm font-medium text-primary mb-2"
                     htmlFor="password"
                   >
                     Password
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8A8A8A]">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-secondary">
                       <svg
                         className="w-5 h-5"
                         fill="none"
@@ -204,14 +203,14 @@ const Signin = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       onBlur={handlePasswordBlur}
-                      className={`form-input w-full pl-12 pr-12 py-3 rounded-xl bg-[#FAFAF7] ${errors.password ? "error" : ""}`}
+                      className={`form-input w-full pl-12 pr-12 py-3 rounded-xl ${errors.password ? "border-red-500 focus:border-red-500" : ""}`}
                       placeholder="Enter your password"
                       autoComplete="current-password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8A8A] hover:text-[#1A1A1A]"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
                       aria-label="Toggle password visibility"
                     >
                       {showPassword ? (
@@ -252,7 +251,7 @@ const Signin = () => {
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="text-xs text-[#E53935] mt-1">
+                    <p className="text-xs text-red-500 mt-1">
                       {errors.password}
                     </p>
                   )}
@@ -265,15 +264,15 @@ const Signin = () => {
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
-                      className="checkbox-custom"
+                      className="w-4 h-4 rounded border-line text-industrial-red focus:ring-industrial-red"
                     />
-                    <span className="text-sm text-[#8A8A8A] group-hover:text-[#1A1A1A] transition-colors">
+                    <span className="text-sm text-secondary group-hover:text-primary transition-colors">
                       Remember me
                     </span>
                   </label>
                   <a
                     href="#"
-                    className="text-sm font-medium text-[#C45C3E] hover:text-[#A84A30] transition-colors"
+                    className="text-sm font-medium text-industrial-red hover:text-industrial-red-hover transition-colors"
                   >
                     Forgot Password?
                   </a>
@@ -283,8 +282,7 @@ const Signin = () => {
                 <button
                   type="submit"
                   disabled={isLoading || isSuccess}
-                  style={{ background: isSuccess ? "#4CAF50" : undefined }}
-                  className="btn-primary w-full py-4 rounded-full font-semibold relative z-10 mt-6 disabled:opacity-90"
+                  className={`btn-primary w-full py-4 rounded-full font-semibold relative z-10 mt-6 disabled:opacity-90 ${isSuccess ? "!bg-green-600" : ""}`}
                 >
                   {isLoading ? (
                     <svg
@@ -316,14 +314,14 @@ const Signin = () => {
 
               {/* Divider */}
               <div className="flex items-center gap-4 my-8">
-                <div className="flex-1 h-px bg-[#E8E8E5]" />
-                <span className="text-sm text-[#8A8A8A]">or continue with</span>
-                <div className="flex-1 h-px bg-[#E8E8E5]" />
+                <div className="flex-1 h-px bg-line" />
+                <span className="text-sm text-secondary">or continue with</span>
+                <div className="flex-1 h-px bg-line" />
               </div>
 
               {/* Social Sign In */}
               <div className="grid grid-cols-2 gap-4">
-                <button className="btn-social flex items-center justify-center gap-2 py-3 rounded-xl font-medium">
+                <button className="flex items-center justify-center gap-2 py-3 rounded-xl font-medium border border-line bg-surface hover:bg-muted transition-colors text-primary">
                   <svg
                     className="w-5 h-5"
                     viewBox="0 0 24 24"
@@ -336,7 +334,7 @@ const Signin = () => {
                   </svg>
                   Google
                 </button>
-                <button className="btn-social flex items-center justify-center gap-2 py-3 rounded-xl font-medium">
+                <button className="flex items-center justify-center gap-2 py-3 rounded-xl font-medium border border-line bg-surface hover:bg-muted transition-colors text-primary">
                   <svg
                     className="w-5 h-5"
                     fill="currentColor"
@@ -349,11 +347,11 @@ const Signin = () => {
               </div>
 
               {/* Sign Up Link */}
-              <p className="text-center text-sm text-[#8A8A8A] mt-8">
+              <p className="text-center text-sm text-secondary mt-8">
                 Don't have an account?{" "}
                 <Link
                   to="/signup"
-                  className="font-medium text-[#1A1A1A] hover:text-[#C45C3E] transition-colors"
+                  className="font-medium text-primary hover:text-industrial-red transition-colors"
                 >
                   Create Account
                 </Link>
@@ -361,7 +359,7 @@ const Signin = () => {
             </div>
 
             {/* Security Note */}
-            <p className="text-center text-xs text-[#8A8A8A] mt-6 px-4 flex items-center justify-center gap-2">
+            <p className="text-center text-xs text-secondary mt-6 px-4 flex items-center justify-center gap-2">
               <svg
                 className="w-4 h-4"
                 fill="none"
@@ -382,8 +380,12 @@ const Signin = () => {
 
         {/* Toast Notification */}
         {toast.show && (
-          <div className={`toast show ${toast.isError ? "error" : ""}`}>
-            <div className="flex items-center gap-3">
+          <div className="fixed bottom-4 right-4 z-50 animate-fade-in">
+            <div className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border ${
+              toast.isError 
+                ? "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/50 dark:border-red-700 dark:text-red-200" 
+                : "bg-surface border-line text-primary"
+            }`}>
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -406,7 +408,7 @@ const Signin = () => {
                   />
                 )}
               </svg>
-              <span>{toast.message}</span>
+              <span className="text-sm">{toast.message}</span>
             </div>
           </div>
         )}

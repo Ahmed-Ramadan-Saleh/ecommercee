@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import "./productManagement.css"; // Assuming CSS is here
 
 // --- Helper Component ---
 const StatusBadge = ({ stock }) => {

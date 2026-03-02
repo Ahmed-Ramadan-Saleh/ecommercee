@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import "./contact.css"; // Custom CSS if needed
 
 const Contact = () => {
   // Form State
@@ -57,20 +56,20 @@ const Contact = () => {
       <Helmet>
         <title>Contact Us - SHOP.CO</title>
       </Helmet>
-      <div className="bg-texture">
+      <div className="bg-texture px-4">
 
         {/* Page Header */}
-        <div className="bg-[#F0F0ED] py-8 lg:py-12">
+        <div className="bg-muted dark:bg-gray-900 py-8 lg:py-12 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center text-sm text-[#8A8A8A] mb-4">
-              <Link to="/" className="hover:text-[#C45C3E]">Home</Link>
+            <nav className="flex items-center text-sm text-secondary mb-4">
+              <Link to="/" className="hover:text-industrial-red transition-colors">Home</Link>
               <svg className="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              <span className="text-[#1A1A1A]">Contact</span>
+              <span className="text-primary">Contact</span>
             </nav>
-            <h1 className="font-display text-3xl lg:text-4xl font-bold text-[#1A1A1A]">
+            <h1 className="font-display text-3xl lg:text-4xl font-bold text-primary">
               Contact Us
             </h1>
-            <p className="text-[#8A8A8A] mt-2 max-w-xl">
+            <p className="text-secondary mt-2 max-w-xl">
               We'd love to hear from you. Our team is here to help.
             </p>
           </div>
@@ -85,16 +84,16 @@ const Contact = () => {
               {contactInfo.map((info) => (
                 <div 
                   key={info.title}
-                  className="bg-white border border-gray-200 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow animate-fade-up"
+                  className="bg-surface border border-line rounded-2xl p-8 text-center hover:shadow-lg transition-shadow animate-fade-up"
                 >
-                  <div className="w-14 h-14 bg-[#C45C3E]/10 rounded-xl flex items-center justify-center mx-auto mb-4 text-[#C45C3E]">
+                  <div className="w-14 h-14 bg-industrial-red/10 dark:bg-industrial-red/20 rounded-xl flex items-center justify-center mx-auto mb-4 text-industrial-red">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d={info.icon} />
                     </svg>
                   </div>
-                  <h3 className="font-semibold text-lg mb-3">{info.title}</h3>
+                  <h3 className="font-semibold text-lg mb-3 text-primary">{info.title}</h3>
                   {info.details.map((detail, i) => (
-                    <p key={i} className="text-sm text-gray-500 leading-relaxed">
+                    <p key={i} className="text-sm text-secondary leading-relaxed">
                       {detail}
                     </p>
                   ))}
@@ -107,58 +106,58 @@ const Contact = () => {
               
               {/* Contact Form */}
               <div className="lg:col-span-3 animate-fade-up">
-                <div className="bg-white rounded-2xl border border-gray-200 p-8 lg:p-10">
-                  <h2 className="font-display text-2xl font-bold mb-6">Send us a Message</h2>
+                <div className="bg-surface rounded-2xl border border-line p-8 lg:p-10 shadow-sm">
+                  <h2 className="font-display text-2xl font-bold mb-6 text-primary">Send us a Message</h2>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <label className="block text-sm font-medium text-primary mb-2">Full Name</label>
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
+                          className="form-input w-full px-4 py-3 rounded-xl"
                           placeholder="John Doe"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <label className="block text-sm font-medium text-primary mb-2">Email Address</label>
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
+                          className="form-input w-full px-4 py-3 rounded-xl"
                           placeholder="john@example.com"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                      <label className="block text-sm font-medium text-primary mb-2">Subject</label>
                       <input
                         type="text"
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors"
+                        className="form-input w-full px-4 py-3 rounded-xl"
                         placeholder="How can we help?"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                      <label className="block text-sm font-medium text-primary mb-2">Message</label>
                       <textarea
                         name="message"
                         rows={5}
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] transition-colors resize-none"
+                        className="form-input w-full px-4 py-3 rounded-xl resize-none"
                         placeholder="Write your message here..."
                       />
                     </div>
@@ -166,7 +165,7 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-primary w-full py-4 rounded-full font-semibold text-white relative z-10 disabled:opacity-70"
+                      className="btn-primary w-full py-4 rounded-full font-semibold relative z-10 disabled:opacity-70"
                     >
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
@@ -176,8 +175,7 @@ const Contact = () => {
 
               {/* Map / Image */}
               <div className="lg:col-span-2 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-                <div className="h-full min-h-[400px] bg-gray-100 rounded-2xl overflow-hidden relative">
-                   {/* Replace with actual Google Maps Embed or Image */}
+                <div className="h-full min-h-[400px] bg-muted rounded-2xl overflow-hidden relative border border-line">
                    <img 
                       src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80" 
                       alt="Location Map"
@@ -187,7 +185,7 @@ const Contact = () => {
                    <div className="absolute bottom-0 left-0 p-6 text-white">
                       <h3 className="font-semibold text-lg">Our Flagship Store</h3>
                       <p className="text-sm text-gray-200">123 Fashion Street, NYC</p>
-                      <a href="#" className="text-sm font-medium text-[#C45C3E] mt-2 inline-block hover:underline">
+                      <a href="#" className="text-sm font-medium text-industrial-red mt-2 inline-block hover:underline">
                         Get Directions
                       </a>
                    </div>
@@ -199,23 +197,22 @@ const Contact = () => {
         </section>
 
         {/* FAQ CTA */}
-        <section className="py-12 lg:py-16 bg-[#F0F0ED]">
+        <section className="py-12 lg:py-16 bg-muted dark:bg-gray-900 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-2xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-gray-200 shadow-sm">
+            <div className="bg-surface rounded-2xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-line shadow-sm">
               <div className="text-center md:text-left">
-                <h2 className="font-display text-2xl font-bold mb-2">Looking for quick answers?</h2>
-                <p className="text-gray-500">Check out our FAQ section for immediate assistance.</p>
+                <h2 className="font-display text-2xl font-bold mb-2 text-primary">Looking for quick answers?</h2>
+                <p className="text-secondary">Check out our FAQ section for immediate assistance.</p>
               </div>
               <a 
                 href="#" 
-                className="btn-secondary px-8 py-3 rounded-full font-semibold whitespace-nowrap border-gray-300"
+                className="btn-secondary px-8 py-3 rounded-full font-semibold whitespace-nowrap border-line"
               >
                 View FAQs
               </a>
             </div>
           </div>
         </section>
-
 
       </div>
     </>

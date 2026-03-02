@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Layout User
+import MainLayout from "./user/layouts/MainLayout";
 // User
 import Home from "./user/home/home";
 import Signup from "./user/signup/signup";
@@ -13,8 +15,6 @@ import About from "./user/about/about";
 import Checkout from "./user/checkout/checkout";
 import Contact from "./user/contact/contact";
 import Page404 from "./user/page404/page404";
-import Header from "./user/component/header/header";
-import Footer from "./user/component/footer/footer";
 
 // Admin
 import AdminLogin from "./admin/adminLogin/adminLogin";
@@ -28,20 +28,21 @@ import AppearanceSettings from "./admin/appearanceSettings/appearanceSettings";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         {/* User Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/detail" element={<Detail />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/detail" element={<Detail />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLogin />} />
@@ -55,7 +56,6 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<Page404 />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

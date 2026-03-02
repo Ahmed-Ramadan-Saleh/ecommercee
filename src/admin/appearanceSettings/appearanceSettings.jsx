@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import "./appearanceSettings.css"; // Assuming custom CSS is here
 
 const AppearanceSettings = () => {
   // --- State ---

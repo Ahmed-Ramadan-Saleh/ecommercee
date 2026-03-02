@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import "./orderManagement.css"; // Assuming CSS is here
 
 // --- Mock Data ---
 const ORDERS_DATA = [

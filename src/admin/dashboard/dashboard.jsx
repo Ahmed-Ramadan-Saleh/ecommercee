@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
-import "./dashboard.css"; // Assuming CSS is here
 
 // --- Data Constants ---
 const ORDERS_DATA = [

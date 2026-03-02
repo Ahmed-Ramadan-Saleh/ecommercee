@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import "./customerManagement.css"; // Assuming CSS is here
 
 // --- Mock Data ---
 const CUSTOMERS_DATA = [

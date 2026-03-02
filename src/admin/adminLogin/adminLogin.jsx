@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import "./adminLogin.css"; // Assuming CSS is here
 
 const AdminLogin = () => {
   // --- State ---
