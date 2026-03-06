@@ -24,6 +24,7 @@ import CustomerManagement from "./admin/customerManagement/customerManagement";
 import OrderManagement from "./admin/orderManagement/orderManagement";
 import MarketingContent from "./admin/marketingContent/marketingContent";
 import AppearanceSettings from "./admin/appearanceSettings/appearanceSettings";
+import AdminLayout from "./admin/layout/adminLayout";
 
 function App() {
   return (
@@ -46,12 +47,16 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/products" element={<ProductManagement />} />
-        <Route path="/admin/customers" element={<CustomerManagement />} />
-        <Route path="/admin/orders" element={<OrderManagement />} />
-        <Route path="/admin/marketing" element={<MarketingContent />} />
-        <Route path="/admin/appearance" element={<AppearanceSettings />} />
+        <Route element={<AdminLayout />}>
+        
+          <Route path="/admin/dashboard" element={<Dashboard />} />  
+          <Route path="/admin/products" element={<ProductManagement />} />
+          <Route path="/admin/customers" element={<CustomerManagement />} />
+          <Route path="/admin/orders" element={<OrderManagement />} />
+          <Route path="/admin/marketing" element={<MarketingContent />} />
+        
+          <Route path="/admin/appearance" element={<AppearanceSettings />} />
+        </Route>
 
         {/* 404 */}
         <Route path="*" element={<Page404 />} />
