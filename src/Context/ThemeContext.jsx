@@ -20,18 +20,12 @@ const reducer = (firstState, action) => {
   }
 };
 
-
-
-
-
 export function DataProvider({ children }) {
   const [firstState, dispatch] = useReducer(reducer, initialData);
   const changeTheme = (valu) => {
     dispatch({ type: "CHANGE_THEME", newValue: valu });
   };
 
-
-  
   return (
     <ThemeContexttt.Provider value={{ ...firstState, changeTheme }}>
       {children}

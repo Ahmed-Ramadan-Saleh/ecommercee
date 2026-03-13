@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import LocationUser from "../shared/LocationUser";
 
 const Contact = () => {
   // Form State
@@ -22,7 +23,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       console.log("Form Submitted:", formData);
@@ -41,7 +42,11 @@ const Contact = () => {
     },
     {
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "Mon-Fri: 9am - 6pm EST", "Sat: 10am - 4pm EST"],
+      details: [
+        "+1 (555) 123-4567",
+        "Mon-Fri: 9am - 6pm EST",
+        "Sat: 10am - 4pm EST",
+      ],
       icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
     },
     {
@@ -57,16 +62,11 @@ const Contact = () => {
         <title>Contact Us - SHOP.CO</title>
       </Helmet>
       <div className="bg-texture px-4">
-
         {/* Page Header */}
-        <div className="bg-muted dark:bg-gray-900 py-8 lg:py-12 transition-colors">
+        <div className=" py-8 lg:py-12 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center text-sm text-secondary mb-4">
-              <Link to="/" className="hover:text-industrial-red transition-colors">Home</Link>
-              <svg className="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              <span className="text-primary">Contact</span>
-            </nav>
-            <h1 className="font-display text-3xl lg:text-4xl font-bold text-primary">
+            <LocationUser>Contact</LocationUser>
+            <h1 className=" font-display text-3xl lg:text-4xl font-bold text-primary">
               Contact Us
             </h1>
             <p className="text-secondary mt-2 max-w-xl">
@@ -78,22 +78,36 @@ const Contact = () => {
         {/* Main Content */}
         <section className="py-12 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
             {/* Contact Cards */}
             <div className="grid md:grid-cols-3 gap-6 mb-16">
               {contactInfo.map((info) => (
-                <div 
+                <div
                   key={info.title}
                   className="bg-surface border border-line rounded-2xl p-8 text-center hover:shadow-lg transition-shadow animate-fade-up"
                 >
                   <div className="w-14 h-14 bg-industrial-red/10 dark:bg-industrial-red/20 rounded-xl flex items-center justify-center mx-auto mb-4 text-industrial-red">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d={info.icon} />
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d={info.icon}
+                      />
                     </svg>
                   </div>
-                  <h3 className="font-semibold text-lg mb-3 text-primary">{info.title}</h3>
+                  <h3 className="font-semibold text-lg mb-3 text-primary">
+                    {info.title}
+                  </h3>
                   {info.details.map((detail, i) => (
-                    <p key={i} className="text-sm text-secondary leading-relaxed">
+                    <p
+                      key={i}
+                      className="text-sm text-secondary leading-relaxed"
+                    >
                       {detail}
                     </p>
                   ))}
@@ -103,15 +117,18 @@ const Contact = () => {
 
             {/* Form & Map Row */}
             <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
-              
               {/* Contact Form */}
               <div className="lg:col-span-3 animate-fade-up">
                 <div className="bg-surface rounded-2xl border border-line p-8 lg:p-10 shadow-sm">
-                  <h2 className="font-display text-2xl font-bold mb-6 text-primary">Send us a Message</h2>
+                  <h2 className="font-display text-2xl font-bold mb-6 text-primary">
+                    Send us a Message
+                  </h2>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-primary mb-2">Full Name</label>
+                        <label className="block text-sm font-medium text-primary mb-2">
+                          Full Name
+                        </label>
                         <input
                           type="text"
                           name="name"
@@ -123,7 +140,9 @@ const Contact = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-primary mb-2">Email Address</label>
+                        <label className="block text-sm font-medium text-primary mb-2">
+                          Email Address
+                        </label>
                         <input
                           type="email"
                           name="email"
@@ -135,9 +154,11 @@ const Contact = () => {
                         />
                       </div>
                     </div>
-                    
+
                     <div>
-                      <label className="block text-sm font-medium text-primary mb-2">Subject</label>
+                      <label className="block text-sm font-medium text-primary mb-2">
+                        Subject
+                      </label>
                       <input
                         type="text"
                         name="subject"
@@ -150,7 +171,9 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-primary mb-2">Message</label>
+                      <label className="block text-sm font-medium text-primary mb-2">
+                        Message
+                      </label>
                       <textarea
                         name="message"
                         rows={5}
@@ -174,24 +197,33 @@ const Contact = () => {
               </div>
 
               {/* Map / Image */}
-              <div className="lg:col-span-2 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+              <div
+                className="lg:col-span-2 animate-fade-up"
+                style={{ animationDelay: "0.2s" }}
+              >
                 <div className="h-full min-h-[400px] bg-muted rounded-2xl overflow-hidden relative border border-line">
-                   <img 
-                      src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80" 
-                      alt="Location Map"
-                      className="w-full h-full object-cover"
-                   />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                   <div className="absolute bottom-0 left-0 p-6 text-white">
-                      <h3 className="font-semibold text-lg">Our Flagship Store</h3>
-                      <p className="text-sm text-gray-200">123 Fashion Street, NYC</p>
-                      <a href="#" className="text-sm font-medium text-industrial-red mt-2 inline-block hover:underline">
-                        Get Directions
-                      </a>
-                   </div>
+                  <img
+                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80"
+                    alt="Location Map"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 className="font-semibold text-lg">
+                      Our Flagship Store
+                    </h3>
+                    <p className="text-sm text-gray-200">
+                      123 Fashion Street, NYC
+                    </p>
+                    <a
+                      href="#"
+                      className="text-sm font-medium text-industrial-red mt-2 inline-block hover:underline"
+                    >
+                      Get Directions
+                    </a>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
@@ -201,11 +233,15 @@ const Contact = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-surface rounded-2xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-line shadow-sm">
               <div className="text-center md:text-left">
-                <h2 className="font-display text-2xl font-bold mb-2 text-primary">Looking for quick answers?</h2>
-                <p className="text-secondary">Check out our FAQ section for immediate assistance.</p>
+                <h2 className="font-display text-2xl font-bold mb-2 text-primary">
+                  Looking for quick answers?
+                </h2>
+                <p className="text-secondary">
+                  Check out our FAQ section for immediate assistance.
+                </p>
               </div>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="btn-secondary px-8 py-3 rounded-full font-semibold whitespace-nowrap border-line"
               >
                 View FAQs
@@ -213,7 +249,6 @@ const Contact = () => {
             </div>
           </div>
         </section>
-
       </div>
     </>
   );

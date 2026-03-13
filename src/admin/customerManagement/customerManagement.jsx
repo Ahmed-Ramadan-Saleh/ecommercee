@@ -33,12 +33,7 @@ const CustomerManagement = () => {
       
       {/* Table Section */}
       <div className="bg-surface rounded-xl border border-line overflow-hidden shadow-sm">
-        
-        {/* 
-           Responsive Table Strategy:
-           1. Mobile (< sm): 'block' display turns table into a stack of cards.
-           2. Desktop (>= sm): 'table' display shows standard table.
-        */}
+  
         <table className="w-full">
           
           {/* Desktop Header - Hidden on Mobile */}

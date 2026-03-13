@@ -48,13 +48,12 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLogin />} />
         <Route element={<AdminLayout />}>
-        
-          <Route path="/admin/dashboard" element={<Dashboard />} />  
+          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<ProductManagement />} />
           <Route path="/admin/customers" element={<CustomerManagement />} />
           <Route path="/admin/orders" element={<OrderManagement />} />
           <Route path="/admin/marketing" element={<MarketingContent />} />
-        
+
           <Route path="/admin/appearance" element={<AppearanceSettings />} />
         </Route>
 

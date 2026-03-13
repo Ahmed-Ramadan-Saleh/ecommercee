@@ -9,14 +9,12 @@ const MainLayout = () => {
   const { Theme } = useContext(DataContext);
   const { pathname } = useLocation();
 
-
-// Restore in localstorge
-  localStorage.setItem("theme", Theme)
+  // Restore in localstorge
+  localStorage.setItem("theme", Theme);
   // Automatically scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
 
   return (
     <div
@@ -24,7 +22,7 @@ const MainLayout = () => {
     >
       <Header />
 
-      <main className="flex-grow pt-[104px] lg:pt-[120px]">
+      <main className="flex-grow pt-[110px] lg:pt-[120px]">
         <Outlet />
       </main>
 

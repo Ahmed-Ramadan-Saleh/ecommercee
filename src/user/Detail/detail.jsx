@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import LocationUser from "../shared/LocationUser";
+import ProductDetail from "./1-ProductDetail";
+import SimilarProducts from "./2-SimilarProducts";
+import CustomerReviews from "./3-CustomerReviews";
 
 // --- Data Constants ---
 const COLORS = [
@@ -24,7 +28,8 @@ const REVIEWS = [
   {
     id: 1,
     name: "Sarah Mitchell",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
     rating: 5,
     date: "2 days ago",
     verified: true,
@@ -35,7 +40,8 @@ const REVIEWS = [
   {
     id: 2,
     name: "James Wilson",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
     rating: 5,
     date: "1 week ago",
     verified: true,
@@ -46,7 +52,8 @@ const REVIEWS = [
   {
     id: 3,
     name: "Emma Thompson",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
     rating: 4,
     date: "2 weeks ago",
     verified: true,
@@ -57,34 +64,98 @@ const REVIEWS = [
 ];
 
 const SIMILAR_PRODUCTS = [
-  { id: 1, name: "Vintage Logo T-Shirt", price: 95, rating: 4.7, reviews: 156, image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80", badge: null },
-  { id: 2, name: "Essential Crew Tee", price: 75, originalPrice: 95, rating: 4.8, reviews: 289, image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&q=80", badge: "-21%" },
-  { id: 3, name: "Artistic Print Tee", price: 110, rating: 4.6, reviews: 98, image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&q=80", badge: "New" },
-  { id: 4, name: "Minimal Design Shirt", price: 85, rating: 4.9, reviews: 203, image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&q=80", badge: null },
+  {
+    id: 1,
+    name: "Vintage Logo T-Shirt",
+    price: 95,
+    rating: 4.7,
+    reviews: 156,
+    image:
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80",
+    badge: null,
+  },
+  {
+    id: 2,
+    name: "Essential Crew Tee",
+    price: 75,
+    originalPrice: 95,
+    rating: 4.8,
+    reviews: 289,
+    image:
+      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&q=80",
+    badge: "-21%",
+  },
+  {
+    id: 3,
+    name: "Artistic Print Tee",
+    price: 110,
+    rating: 4.6,
+    reviews: 98,
+    image:
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&q=80",
+    badge: "New",
+  },
+  {
+    id: 4,
+    name: "Minimal Design Shirt",
+    price: 85,
+    rating: 4.9,
+    reviews: 203,
+    image:
+      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&q=80",
+    badge: null,
+  },
 ];
 
 const PRODUCT_IMAGES = [
   "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
   "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
   "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80",
-  "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80"
+  "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
 ];
 
 // --- Helper Component: StarRating ---
 const StarRating = ({ rating, className = "w-4 h-4" }) => {
   const fullStars = Math.floor(rating);
   const hasHalf = rating % 1 >= 0.5;
-  
+
   return (
     <div className="flex">
       {[...Array(5)].map((_, i) => {
         if (i < fullStars) {
-          return <svg key={i} className={`${className} text-yellow-400`} fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>;
+          return (
+            <svg
+              key={i}
+              className={`${className} text-yellow-400`}
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          );
         }
         if (i === fullStars && hasHalf) {
-          return <svg key={i} className={`${className} text-yellow-400`} fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77V2z"/></svg>;
+          return (
+            <svg
+              key={i}
+              className={`${className} text-yellow-400`}
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77V2z" />
+            </svg>
+          );
         }
-        return <svg key={i} className={`${className} text-gray-300 dark:text-gray-600`} fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>;
+        return (
+          <svg
+            key={i}
+            className={`${className} text-gray-300 dark:text-gray-600`}
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        );
       })}
     </div>
   );
@@ -101,20 +172,25 @@ const Detail = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   // --- Effects ---
-  
+
   // Scroll Reveal
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (prefersReducedMotion) {
-      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("active"));
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => el.classList.add("active"));
       return;
     }
 
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("active");
-      }),
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("active");
+        }),
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
     );
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
@@ -143,268 +219,82 @@ const Detail = () => {
         <title>One Life Graphic T-Shirt - SHOP.CO</title>
       </Helmet>
       <div className="bg-texture px-4">
-
         {/* Breadcrumb */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex items-center text-sm text-secondary" aria-label="Breadcrumb">
-            <Link to="/" className="hover:text-industrial-red transition-colors">Home</Link>
-            <svg className="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            <Link to="/category" className="hover:text-industrial-red transition-colors">Shop</Link>
-            <svg className="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            <Link to="/category" className="hover:text-industrial-red transition-colors">T-Shirts</Link>
-            <svg className="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+        <LocationUser>
+          <nav
+            className="flex items-center text-sm text-secondary"
+            aria-label="Breadcrumb"
+          >
+            <Link
+              to="/category"
+              className="hover:text-industrial-red transition-colors"
+            >
+              Shop
+            </Link>
+            <svg
+              className="w-4 h-4 mx-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+            <Link
+              to="/category"
+              className="hover:text-industrial-red transition-colors"
+            >
+              T-Shirts
+            </Link>
+            <svg
+              className="w-4 h-4 mx-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
             <span className="text-primary">One Life Graphic T-Shirt</span>
           </nav>
-        </div>
+        </LocationUser>
 
-        {/* Product Detail Section */}
-        <section className="py-8 lg:py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
-              {/* Product Images */}
-              <div className="space-y-4 animate-fade-up">
-                <div className="aspect-square bg-muted rounded-3xl overflow-hidden relative">
-                  <img
-                    src={mainImage}
-                    alt="Product"
-                    className="w-full h-full object-cover cursor-zoom-in"
-                  />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-industrial-red text-white text-sm font-medium rounded-full">-40%</span>
-                </div>
-                <div className="grid grid-cols-4 gap-3">
-                  {PRODUCT_IMAGES.map((img, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setMainImage(img)}
-                      className={`aspect-square bg-muted rounded-xl overflow-hidden border-2 transition-colors ${mainImage === img ? "border-industrial-dark dark:border-white" : "border-transparent"}`}
-                    >
-                      <img src={img.replace("w=800", "w=200")} alt={`Product view ${index + 1}`} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="space-y-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-                <div>
-                  <h1 className="font-display text-3xl lg:text-4xl font-bold mb-2 text-primary">One Life Graphic T-Shirt</h1>
-                  <div className="flex items-center gap-3">
-                    <StarRating rating={4.5} />
-                    <span className="text-sm text-secondary">4.5 (3.2k Reviews)</span>
-                    <span className="text-sm text-green-600 font-medium">In Stock</span>
-                  </div>
-                </div>
-
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-bold text-primary">$260</span>
-                  <span className="text-xl text-secondary line-through">$300</span>
-                  <span className="px-2 py-1 bg-industrial-red/10 text-industrial-red text-sm font-medium rounded">-40%</span>
-                </div>
-
-                <p className="text-secondary leading-relaxed">
-                  This graphic t-shirt turns heads with its bold "One Life" design. Made from premium 100% organic cotton for ultimate comfort and style. Perfect for casual outings or making a statement.
-                </p>
-
-                {/* Color Selection */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-primary">Color</span>
-                    <span className="text-sm text-secondary">{selectedColor.name}</span>
-                  </div>
-                  <div className="flex gap-3">
-                    {COLORS.map((color) => (
-                      <button
-                        key={color.id}
-                        onClick={() => setSelectedColor(color)}
-                        className={`w-10 h-10 rounded-full border-2 transition-all ${selectedColor.id === color.id ? "border-industrial-dark dark:border-white ring-2 ring-offset-2 ring-industrial-dark dark:ring-white" : "border-transparent"}`}
-                        style={{ backgroundColor: color.hex }}
-                        title={color.name}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Size Selection */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-primary">Size</span>
-                    <button className="text-sm text-industrial-red hover:underline">Size Guide</button>
-                  </div>
-                  <div className="flex gap-2">
-                    {SIZES.map((size) => (
-                      <button
-                        key={size.id}
-                        onClick={() => size.available && setSelectedSize(size)}
-                        disabled={!size.available}
-                        className={`w-12 h-12 border rounded-lg font-medium text-sm transition-colors
-                          ${selectedSize.id === size.id ? "bg-industrial-dark text-white border-industrial-dark" : "border-line hover:border-primary text-primary"}
-                          ${!size.available ? "opacity-40 cursor-not-allowed line-through" : ""}`}
-                      >
-                        {size.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Quantity & Add to Cart */}
-                <div className="flex gap-4">
-                  <div className="flex items-center border border-line rounded-full">
-                    <button onClick={() => handleQuantity(-1)} className="w-12 h-12 flex items-center justify-center rounded-l-full text-primary hover:bg-muted transition-colors" aria-label="Decrease quantity">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
-                    </button>
-                    <span className="w-12 text-center font-medium text-primary">{quantity}</span>
-                    <button onClick={() => handleQuantity(1)} className="w-12 h-12 flex items-center justify-center rounded-r-full text-primary hover:bg-muted transition-colors" aria-label="Increase quantity">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-                    </button>
-                  </div>
-                  <button
-                    onClick={handleAddToCart}
-                    className={`btn-primary flex-1 px-8 py-3 rounded-full font-semibold relative z-10 transition-colors ${isAdding ? "!bg-green-600" : ""}`}
-                  >
-                    {isAdding ? "Added!" : "Add to Cart"}
-                  </button>
-                </div>
-
-                {/* Info Cards */}
-                <div className="space-y-3 pt-4 border-t border-line">
-                   <div className="flex items-center gap-4 p-4 bg-muted rounded-xl">
-                     <svg className="w-6 h-6 text-industrial-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
-                     <div><p className="font-medium text-sm text-primary">Free Shipping</p><p className="text-xs text-secondary">On orders over $100</p></div>
-                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Product Details Accordion */}
-            <div className="mt-12 lg:mt-16 border-t border-line pt-8">
-              <div className="grid lg:grid-cols-3 gap-8">
-                {[
-                  { id: "desc-content", title: "Product Details", content: "Premium quality graphic t-shirt made from 100% organic cotton. Features a bold 'One Life' design printed with eco-friendly inks. Relaxed fit, true to size." },
-                  { id: "ship-content", title: "Shipping Info", content: "We offer fast and reliable shipping options. Standard delivery takes 3-5 business days. Express shipping available at checkout." },
-                  { id: "return-content", title: "Returns", content: "Not satisfied? No problem! We offer free returns within 30 days of purchase. Items must be unworn with tags attached." }
-                ].map((section) => (
-                  <div key={section.id} className="lg:col-span-1 reveal">
-                    <button
-                      onClick={() => toggleAccordion(section.id)}
-                      className="w-full flex items-center justify-between py-4 border-b border-line text-left"
-                    >
-                      <span className="font-display text-xl font-semibold text-primary">{section.title}</span>
-                      <svg className={`w-5 h-5 text-primary transition-transform ${activeAccordion === section.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                    <div className={`overflow-hidden transition-all duration-300 ${activeAccordion === section.id ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-                      <div className="py-4 text-secondary">{section.content}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Customer Reviews */}
-        <section className="py-12 lg:py-16 bg-muted dark:bg-gray-900 transition-colors">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-8 reveal">
-              <div>
-                <h2 className="font-display text-2xl lg:text-3xl font-bold text-primary">Customer Reviews</h2>
-                <div className="flex items-center gap-2 mt-2">
-                  <StarRating rating={4.5} className="w-5 h-5" />
-                  <span className="text-secondary">Based on 3,247 reviews</span>
-                </div>
-              </div>
-              <button className="hidden sm:block btn-secondary px-6 py-2 rounded-full text-sm font-medium">Write a Review</button>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-6 mb-8">
-              {/* Review Stats */}
-              <div className="md:col-span-1 bg-surface rounded-2xl p-6 reveal shadow-sm">
-                <div className="text-center">
-                  <p className="font-display text-5xl font-bold text-primary">4.5</p>
-                  <div className="flex justify-center mt-2"><StarRating rating={4.5} /></div>
-                  <p className="text-sm text-secondary mt-2">3,247 reviews</p>
-                </div>
-              </div>
-
-              {/* Review List */}
-              <div className="md:col-span-3 space-y-4">
-                {REVIEWS.map((review) => (
-                  <div key={review.id} className="bg-surface rounded-2xl p-6 reveal shadow-sm">
-                    <div className="flex items-start gap-4">
-                      <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h4 className="font-semibold text-primary">{review.name}</h4>
-                            <div className="flex items-center gap-2 mt-1">
-                              <StarRating rating={review.rating} className="w-3 h-3" />
-                              {review.verified && (
-                                <span className="text-xs text-green-600 flex items-center gap-1">
-                                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                                  Verified Purchase
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          <span className="text-sm text-secondary">{review.date}</span>
-                        </div>
-                        <h5 className="font-medium mt-3 text-primary">{review.title}</h5>
-                        <p className="text-sm text-secondary mt-2 leading-relaxed">{review.text}</p>
-                        <div className="flex items-center gap-4 mt-4 pt-4 border-t border-line">
-                          <button className="text-sm text-secondary hover:text-primary transition-colors flex items-center gap-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" /></svg>
-                            Helpful ({review.helpful})
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Product Detail */}
+        <ProductDetail
+          toggleAccordion={toggleAccordion}
+          isAdding={isAdding}
+          handleAddToCart={handleAddToCart}
+          handleQuantity={handleQuantity}
+          quantity={quantity}
+          selectedSize={selectedSize}
+          SIZES={SIZES}
+          setSelectedColor={setSelectedColor}
+          COLORS={COLORS}
+          selectedColor={selectedColor}
+          StarRating={StarRating}
+          setMainImage={setMainImage}
+          PRODUCT_IMAGES={PRODUCT_IMAGES}
+          mainImage={mainImage}
+          setSelectedSize={setSelectedSize}
+          activeAccordion={activeAccordion}
+        />
 
         {/* Similar Products */}
-        <section className="py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-8 reveal">
-              <div>
-                <h2 className="font-display text-2xl lg:text-3xl font-bold text-primary">You May Also Like</h2>
-                <p className="text-secondary mt-1">Similar styles you might enjoy</p>
-              </div>
-              <Link to="/category" className="hidden sm:flex items-center gap-2 text-sm font-medium hover:text-industrial-red transition-colors group">
-                View All
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-              {SIMILAR_PRODUCTS.map((product, index) => (
-                <Link to="/detail" key={product.id} className="product-card rounded-2xl overflow-hidden reveal" style={{ transitionDelay: `${index * 0.1}s` }}>
-                  <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-                    <img src={product.image} alt={product.name} className="product-image w-full h-full object-cover" />
-                    {product.badge && (
-                      <span className={`absolute top-3 left-3 px-3 py-1 text-white text-xs font-medium rounded-full ${product.badge.includes("%") ? "bg-industrial-red" : "bg-industrial-dark"}`}>{product.badge}</span>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-medium text-sm lg:text-base mb-2 line-clamp-1 text-primary">{product.name}</h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <StarRating rating={product.rating} />
-                      <span className="text-xs text-secondary">({product.reviews})</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-primary">${product.price}</span>
-                      {product.originalPrice && <span className="text-sm text-secondary line-through">${product.originalPrice}</span>}
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SimilarProducts
+          StarRating={StarRating}
+          SIMILAR_PRODUCTS={SIMILAR_PRODUCTS}
+        />
 
+        {/* Customer Reviews */}
+        <CustomerReviews REVIEWS={REVIEWS} StarRating={StarRating} />
       </div>
     </>
   );

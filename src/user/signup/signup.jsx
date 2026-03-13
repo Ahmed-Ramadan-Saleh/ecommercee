@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import Toaster from "../shared/Toaster";
 
 // --- Helper Functions ---
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -159,7 +160,6 @@ const Signup = () => {
         <title>Create Account - SHOP.CO</title>
       </Helmet>
       <div className="bg-texture px-4">
-
         {/* Main Content */}
         <main className="flex-grow flex items-center justify-center py-12 lg:py-20 px-4">
           <div className="w-full max-w-md animate-fade-up">
@@ -224,9 +224,7 @@ const Signup = () => {
                     autoComplete="email"
                   />
                   {errors.email && (
-                    <p className="text-xs text-red-500 mt-1">
-                      {errors.email}
-                    </p>
+                    <p className="text-xs text-red-500 mt-1">{errors.email}</p>
                   )}
                 </div>
 
@@ -404,11 +402,17 @@ const Signup = () => {
                     />
                     <span className="text-sm text-secondary group-hover:text-primary transition-colors">
                       I agree to the{" "}
-                      <a href="#" className="text-industrial-red hover:underline">
+                      <a
+                        href="#"
+                        className="text-industrial-red hover:underline"
+                      >
                         Terms of Service
                       </a>{" "}
                       and{" "}
-                      <a href="#" className="text-industrial-red hover:underline">
+                      <a
+                        href="#"
+                        className="text-industrial-red hover:underline"
+                      >
                         Privacy Policy
                       </a>
                     </span>
@@ -482,39 +486,7 @@ const Signup = () => {
         </main>
 
         {/* Toast Notification */}
-        {toast.show && (
-          <div className="fixed bottom-4 right-4 z-50 animate-fade-in">
-            <div className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border ${
-              toast.isError 
-                ? "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/50 dark:border-red-700 dark:text-red-200" 
-                : "bg-surface border-line text-primary"
-            }`}>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {toast.isError ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                )}
-              </svg>
-              <span className="text-sm">{toast.message}</span>
-            </div>
-          </div>
-        )}
+        {toast.show && <Toaster toast={toast} />}
       </div>
     </>
   );
